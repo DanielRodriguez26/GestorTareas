@@ -1,0 +1,14 @@
+.venv/*
+!.venv/bin/activate
+!.venv/lib/
+
+# Environment variables
+.env
+backend/.env
+*.env
+!.env.example
+
+# Database
+tasks.db
+*.db
+

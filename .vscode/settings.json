@@ -1,0 +1,183 @@
+{
+    // Python Configuration
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": true,
+
+    // Python Analysis & IntelliSense
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.completeFunctionParens": true,
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}",
+        "${workspaceFolder}/backend"
+    ],
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.include": [
+        "backend/**/*.py"
+    ],
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}",
+        "${workspaceFolder}/backend"
+    ],
+
+    // Linting Configuration
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": false,
+    "python.linting.lintOnSave": true,
+
+    // Formatting Configuration
+    "python.formatting.provider": "none",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "files.encoding": "utf8"
+    },
+
+    // Black Formatter Settings
+    "black-formatter.args": [
+        "--line-length=100"
+    ],
+
+    // isort Settings (for import sorting)
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+
+    // Testing Configuration
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+        "backend/tests",
+        "-v"
+    ],
+    "python.testing.cwd": "${workspaceFolder}",
+
+    // File Associations
+    "files.associations": {
+        "*.py": "python",
+        ".env*": "properties",
+        "Dockerfile*": "dockerfile",
+        "docker-compose*.yml": "dockercompose"
+    },
+
+    // Files to Exclude from Explorer
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/*.pyo": true,
+        "**/.pytest_cache": true,
+        "**/.mypy_cache": true,
+        "**/node_modules": true,
+        "**/.git": false,
+        "**/tasks.db": false
+    },
+
+    // Files to Exclude from Search
+    "search.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/node_modules": true,
+        "**/.venv": true,
+        "**/venv": true,
+        "**/.git": true
+    },
+
+    // Watch Patterns to Exclude
+    "files.watcherExclude": {
+        "**/__pycache__/**": true,
+        "**/.venv/**": true,
+        "**/venv/**": true,
+        "**/node_modules/**": true
+    },
+
+    // Editor Configuration
+    "editor.rulers": [88, 100],
+    "editor.minimap.enabled": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "editor.suggestSelection": "first",
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false,
+
+    // File Encoding
+    "files.encoding": "utf8",
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.autoGuessEncoding": false,
+    "[python]": {
+        "files.encoding": "utf8"
+    },
+
+    // Terminal Configuration
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "${workspaceFolder}"
+    },
+    "terminal.integrated.cwd": "${workspaceFolder}",
+
+    // Extension Recommendations
+    "extensions.ignoreRecommendations": false,
+
+    // Git Configuration
+    "git.ignoreLimitWarning": true,
+
+    // TypeScript/JavaScript Configuration (for frontend)
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+
+    // ESLint Configuration
+    "eslint.workingDirectories": [
+        "./frontend"
+    ],
+
+    // Prettier Configuration
+    "prettier.enable": true,
+    "prettier.requireConfig": false,
+
+    // HTML/CSS Configuration
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2
+    },
+
+    // Docker Configuration
+    "docker.dockerPath": "docker",
+    "docker.dockerComposePath": "docker-compose",
+
+    // Auto Save
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000
+}
