@@ -197,20 +197,135 @@ curl -X GET "http://localhost:8000/api/tasks/"
 
 ## 🐳 Docker
 
-### Comandos Útiles
+### Inicio Rápido con Docker
+
+La forma más fácil de ejecutar la aplicación es usando Docker. Todo está preconfigurado y listo para usar.
+
+#### Opción 1: Scripts de PowerShell (Windows - RECOMENDADO)
+
+Hemos creado scripts para facilitar el uso de Docker en Windows:
+
+```powershell
+# Iniciar la aplicación (construye e inicia todos los servicios)
+.\docker-start.ps1
+
+# Ver logs en tiempo real
+.\docker-logs.ps1
+
+# Ver logs de un servicio específico
+.\docker-logs.ps1 -Service backend
+.\docker-logs.ps1 -Service frontend
+.\docker-logs.ps1 -Service postgres
+
+# Detener la aplicación
+.\docker-stop.ps1
+```
+
+#### Opción 2: Comandos Docker Compose Directos
 
 ```bash
-# Construir e iniciar
-docker-compose up --build
+# Construir e iniciar todos los servicios
+docker compose up --build -d
 
-# Ejecutar en segundo plano
-docker-compose up -d
+# Ver el estado de los contenedores
+docker compose ps
 
-# Ver logs
-docker-compose logs -f backend
+# Ver logs de todos los servicios
+docker compose logs -f
 
-# Detener
-docker-compose down
+# Ver logs de un servicio específico
+docker compose logs -f backend
+docker compose logs -f frontend
+docker compose logs -f postgres
+
+# Detener servicios
+docker compose down
+
+# Detener y eliminar volúmenes (base de datos)
+docker compose down -v
+```
+
+### Servicios Docker
+
+La aplicación se compone de 3 servicios:
+
+| Servicio | Puerto | Descripción |
+|----------|--------|-------------|
+| **frontend** | 80 | React + TypeScript + Nginx |
+| **backend** | 8000 | FastAPI + Python |
+| **postgres** | 5432 | PostgreSQL 16 |
+
+### URLs de Acceso
+
+Una vez iniciados los contenedores:
+
+- **Frontend:** http://localhost
+- **Backend API:** http://localhost:8000
+- **API Docs (Swagger):** http://localhost:8000/docs
+- **API Docs (ReDoc):** http://localhost:8000/redoc
+- **PostgreSQL:** localhost:5432
+  - User: `postgres`
+  - Password: `postgres`
+  - Database: `gestortareas`
+
+### Configuración de Docker Desktop
+
+Si recibes un error de que Docker no está disponible en WSL:
+
+1. **Instala Docker Desktop** desde: https://www.docker.com/products/docker-desktop
+2. **Abre Docker Desktop** → Settings ⚙️
+3. **Ve a Resources** → **WSL Integration**
+4. **Activa:** "Enable integration with my default WSL distro"
+5. **Marca** tu distribución de Ubuntu/WSL
+6. **Haz clic en** "Apply & Restart"
+
+### Verificar Health Checks
+
+Los contenedores tienen health checks configurados. Para ver el estado:
+
+```bash
+docker compose ps
+```
+
+Deberías ver algo como:
+```
+NAME                      STATUS
+task-manager-backend      Up (healthy)
+task-manager-frontend     Up (healthy)
+task-manager-postgres     Up (healthy)
+```
+
+### Troubleshooting Docker
+
+**Problema:** Los contenedores no inician correctamente
+
+```bash
+# Ver logs detallados
+docker compose logs
+
+# Reconstruir desde cero
+docker compose down -v
+docker compose up --build
+```
+
+**Problema:** Puerto ya en uso
+
+```bash
+# Ver qué proceso usa el puerto 80
+netstat -ano | findstr :80
+
+# O cambiar el puerto en docker-compose.yml
+ports:
+  - "8080:80"  # Cambia el primer número
+```
+
+**Problema:** La base de datos no tiene datos
+
+Los datos se persisten en un volumen Docker. Para resetear:
+
+```bash
+docker compose down -v  # Elimina volúmenes
+docker compose up --build -d  # Inicia desde cero
 ```
 
 ---
